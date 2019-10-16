@@ -3,6 +3,14 @@ import GeradorAssinatura from './components/GeradorAssinatura';
 
 
 class App extends Component {
+
+
+  
+  
+  
+
+
+
   render() {
     return (
       <div>
@@ -10,7 +18,8 @@ class App extends Component {
           <GeradorAssinatura />
         </div>
 
-        <div className="container">
+
+        <div className="footer">
           footer
         </div>
 

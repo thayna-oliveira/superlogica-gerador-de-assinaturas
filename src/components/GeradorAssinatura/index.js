@@ -8,14 +8,58 @@ class GeradorAssinatura extends Component {
       nome: 'Daniel Campos',
       empresa: 'Superlogica',
       cargo: 'Head of Design',
-      email: 'daniel.campos@superlogica.com',
       telefone: '11 0000-0000',
       image: 'https://secure.gravatar.com/avatar/8223e756567ed1117c78b33a752f08d2?s=96&d=mm&r=g'
     };
   }
 
+
+  renderBrand() {
+    let state = this.state.empresa;
+
+    if (state == 'pjbank')
+      return 'https://pjbank.com.br/assinaturas-de-email/logo.jpg';
+
+    return 'https://www.superlogica.com/assinatura-de-email/logo-superlogica.jpg';
+  }
+
+  renderLinha() {
+
+    let state = this.state.empresa;
+
+    if (state == 'pjbank')
+      return 'https://pjbank.com.br/assinaturas-de-email/linha.jpg';
+
+    return 'https://www.superlogica.com/assinatura-de-email/linha-superlogica.jpg';
+  }
+
+  renderURL() {
+
+    let state = this.state.empresa;
+
+    if (state == 'pjbank')
+      return 'https://pjbank.com.br/';
+
+    return 'https://www.superlogica.com/';
+  }
+
+
+
   render() {
+
+    const importAll = require =>
+      require.keys().reduce((acc, next) => {
+        acc[next.replace("./", "")] = require(next);
+        return acc;
+      }, {});
+
+    const images = importAll(
+      require.context("/Users/thaynaoliveira/Desktop/Cards/2841 - Criacao de Assinaturas/superlogica-gerador-de-assinaturas/src/images", false, /\.(png|jpe?g|svg)$/)
+    );
+
+
     return (
+
       <div className="row">
         <div className="col-12 col-lg-5">
           <form>
@@ -42,12 +86,6 @@ class GeradorAssinatura extends Component {
             </div>
 
             <div className="form-group">
-              <label>E-mail</label>
-              <input type="email" id="email" className="form-control"
-                onChange={(e) => this.setState({ email: e.target.value })} />
-            </div>
-
-            <div className="form-group">
               <label>Telefone</label>
               <input type="phone" id="phone" className="form-control"
                 onChange={(e) => this.setState({ telefone: e.target.value })} />
@@ -65,16 +103,14 @@ class GeradorAssinatura extends Component {
         <div className="col-12 col-lg-6 ml-auto">
           <div className="header-email">Nova Mensagem</div>
           <div className="card-email">
-            <div className="destinatario">Para: Daniel Campos</div>
-            <div className="assunto">Assunto: Nova assinatura</div>
+            <div className="destinatario"><span>Para:</span> Daniel Campos</div>
+            <div className="assunto"><span>Assunto:</span> Nova assinatura</div>
             <div className="mensagem">
               Olá Daniel,
-            <br></br>
-              Esse é um exemplo de e-mail do Gerador de Assinaturas de E-mail da Superlógica. Aqui dá para você ter uma ideia de como vai ficar a sua assinatura final.
-            <br></br>
+              <br /><br />
+              Esse é um exemplo de e-mail criado no Gerador de Assinaturas de E-mail da Superlógica. Aqui dá para você ter uma ideia de como vai ficar a sua assinatura final.
+              <br /><br />
               Abraços!
-              <br></br>
-
             </div>
             <div className="assinatura">
 
@@ -82,27 +118,34 @@ class GeradorAssinatura extends Component {
                 <tbody>
                   <tr>
                     <td width="86"><img src={this.state.image} title={this.state.nome} alt={this.state.nome} width="86" height="105" /></td>
-                    <td width="30" align="center"><img src="https://www.superlogica.com/assinatura-de-email/linha-superlogica.jpg" /></td>
+                    <td width="30" align="center"><img src={this.renderLinha()} /></td>
                     <td width="297" valign="top">
                       <p style={{ marginTop: '0px', marginBottom: '5px', lineHeight: '1.0' }}>
                         <strong style={{ fontSize: '22px', color: '#535353' }}>{this.state.nome}</strong></p>
-                        <p style={{ margin: '0px', color: '#707070', fontSize: '14px', marginBottom: '13px', lineHeight: '1.2' }}><span style={{ fontSize: '14px', color: '#707070' }}>{this.state.cargo}<br/>{this.state.telefone} </span></p>
-                        <a href="https://www.superlogica.com" style={{ textDecoration: 'none !important', border: 'none !important'}}><img src="https://www.superlogica.com/assinatura-de-email/logo-superlogica.jpg" border="0" target="_blank"/></a>
-                            </td>
-                        </tr>
-                      <tr>
-                        <td colspan="3" width="415"><p style= {{ margin: '0px', marginTop: '12px', color: '#707070', fontSize: '10px', lineHeight: '1.2', textAlign: 'justify' }}>Este e-mail contém informações confidenciais e/ou privilegiadas. Se você não for o destinatário ou a pessoa autorizada a receber este documento, não deve usar, copiar ou divulgar as informações nele contidas ou tomar qualquer ação baseada nessas informações. Caso tenha recepcionado este e-mail por engano, favor informar o remetente e apagar a mensagem imediatamente. </p></td>
-                      </tr>
-                      </tbody>
-                      </table>
-                  
+                      <p style={{ margin: '0px', color: '#707070', fontSize: '14px', marginBottom: '13px', lineHeight: '1.2' }}><span style={{ fontSize: '14px', color: '#707070' }}>{this.state.cargo}<br />{this.state.telefone} </span></p>
+                      <a href={this.renderURL()} style={{ textDecoration: 'none !important', border: 'none !important' }}>
+                        <img src={this.renderBrand()} alt={this.state.empresa} border="0" target="_blank" /></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" width="415"><p style={{ margin: '0px', marginTop: '12px', color: '#707070', fontSize: '10px', lineHeight: '1.2', textAlign: 'justify' }}>Este e-mail contém informações confidenciais e/ou privilegiadas. Se você não for o destinatário ou a pessoa autorizada a receber este documento, não deve usar, copiar ou divulgar as informações nele contidas ou tomar qualquer ação baseada nessas informações. Caso tenha recepcionado este e-mail por engano, favor informar o remetente e apagar a mensagem imediatamente. </p></td>
+                  </tr>
+                </tbody>
+              </table>
+
             </div>
           </div>
-            </div>
-          </div>
-          )
-        }
-      }
-      
-      
+        </div>
+
+        <div>
+          {Object.keys(images).map(function (key) {
+            return <img src={images[key]}/>;
+          })}
+        </div>
+      </div>
+    )
+  }
+}
+
+
 export default GeradorAssinatura;
