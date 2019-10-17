@@ -11,13 +11,15 @@ class GeradorAssinatura extends Component {
       telefone: '11 0000-0000',
       image: 'https://secure.gravatar.com/avatar/8223e756567ed1117c78b33a752f08d2?s=96&d=mm&r=g',
       copiarFonte: 'Copiar Código Fonte',
-      copiarAssinatura: 'Copiar Assinatura'
+      copiarAssinatura: 'Copiar Assinatura',
+      statusAssinatura: 0,
+      statusFonte: 0
     };
 
-    this.copyToClip = this.copyToClip.bind(this);
+    this.getAssinatura = this.getAssinatura.bind(this);
+    this.getCodigoFonte = this.getCodigoFonte.bind(this);
 
   }
-
 
   renderBrand() {
     let state = this.state.empresa;
@@ -49,15 +51,29 @@ class GeradorAssinatura extends Component {
     return 'https://www.superlogica.com/';
   }
 
-  getAssinatura() {
+  getCodigoFonte() {
 
     let assinatura = document.getElementById('assinatura').innerHTML;
 
-    alert(assinatura);
+    navigator.clipboard.writeText(assinatura);
+
+    this.setState({
+      copiarFonte: "Copiado! ;)",
+      statusFonte: 1
+    });
+
+    setTimeout(function () {
+      this.setState({
+        copiarFonte: "Copiar Código Fonte",
+        statusFonte: 0
+      });
+    }.bind(this), 2000);
+
+
   }
 
 
-  copyToClip() {
+  getAssinatura() {
 
     function listener(e) {
       let str = document.getElementById('assinatura').innerHTML;
@@ -71,8 +87,17 @@ class GeradorAssinatura extends Component {
     document.removeEventListener("copy", listener);
 
     this.setState({
-      copiarAssinatura: "Copiado! Agora é só instalar ;)"
+      copiarAssinatura: "Copiado! Agora é só instalar ;)",
+      statusAssinatura: 1
     });
+
+    setTimeout(function () {
+      this.setState({
+        copiarAssinatura: "Copiar Assinatura",
+        statusAssinatura: 0
+      });
+    }.bind(this), 2000);
+
 
 
   };
@@ -94,55 +119,67 @@ class GeradorAssinatura extends Component {
     return (
 
       <div className="row">
-        <div className="col-12 col-lg-5">
-          <form>
-            <div className="form-group">
-              <label>Nome</label>
+        <div className="col-12 col-lg-6">
+          <form className="pr-lg-5">
+            <h2>Gerador de Assinatura</h2>
+            <div className="form-group mb-3">
+              <label>Insira seu nome e um sobrenome</label>
               <input type="text" id="name" className="form-control"
+                placeholder="Nome Sobrenome"
                 onChange={(e) => this.setState({ nome: e.target.value })} />
             </div>
 
-            <div className="form-group">
-              <label>Empresa</label>
+            <div className="form-group mb-3">
+              <label>Informe sua empresa</label>
               <select className="form-control"
                 onChange={(e) => this.setState({ empresa: e.target.value })}>
-                <option value="">Selecione</option>
+                <option value="">Selecione sua Empresa</option>
                 <option value="superlogica">Superlógica</option>
                 <option value="pjbank">PJBank</option>
               </select>
             </div>
 
-            <div className="form-group">
-              <label>Cargo/Setor</label>
+            <div className="form-group mb-3">
+              <label>Informe seu Cargo/Setor</label>
               <input type="text" id="cargo" className="form-control"
+                placeholder="Cargo/Setor"
                 onChange={(e) => this.setState({ cargo: e.target.value })} />
             </div>
 
-            <div className="form-group">
-              <label>Telefone</label>
-              <input type="phone" id="phone" className="form-control"
+            <div className="form-group mb-3">
+              <label>Insira seu Telefone</label>
+              <input type="phone" id="phone"
+                className="form-control"
+                aria-describedby="helper-phone"
+                placeholder="Telefone"
                 onChange={(e) => this.setState({ telefone: e.target.value })} />
+
+              <small id="helper-phone" class="form-text text-muted">Clique aqui e veja como inserir uma imagem.</small>
+
             </div>
 
-            <div className="form-group">
-              <label>Imagem</label>
-              <input type="text" id="image" className="form-control"
+            <div className="form-group mb-5">
+              <label>Insira o endereço da sua foto ou avatar</label>
+              <input type="text" id="image"
+                className="form-control"
+                aria-describedby="helper"
+                placeholder="www.endereco.com/imagem.png"
                 onChange={(e) => this.setState({ image: e.target.value })} />
+
+              <small id="helper-imagem" class="form-text text-muted">Clique aqui e veja como inserir uma imagem.</small>
             </div>
 
           </form>
 
-
-
-          <button type="button" onClick={this.copyToClip} className="btn btn-primary">
+          <button type="button" onClick={this.getAssinatura}
+            className={this.state.statusAssinatura ? "btn mr-2 btn-success" : "btn mr-2 btn-primary"} >
             {this.state.copiarAssinatura}
           </button>
 
-          <button type="button" onClick={this.getAssinatura} className="btn btn-primary">
+          <button type="button" onClick={this.getCodigoFonte}
+            className={this.state.statusFonte ? "btn mr-2 btn-success" : "btn mr-2 btn-primary"} >
             {this.state.copiarFonte}
           </button>
-
-
 
         </div>
 

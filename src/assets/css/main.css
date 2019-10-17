@@ -1,4 +1,63 @@
-.destinatario, .assunto{
+body *,
+html,
+body {
+    font-family: proxima-nova, sans-serif;
+    font-style: normal;
+}
+
+.nav {
+    width: 100%;
+    height: 75px;
+    min-height: 75px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: #DFDFDF;
+}
+
+.hero {
+    min-height: 80vh;
+    height: 100%;
+    position: relative;
+    padding-bottom: 5rem;
+    padding-top: 30px; 
+}
+
+.form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+input {
+    border: 0;
+    height: 48px;
+    font-size: 15px;
+    padding-left: 44px;
+    color: #1e232c;
+    border: solid 1px #c5cee0;
+    border-radius: 4px;
+    background-size: 20px 20px;
+    background-position: 12px 13px;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+
+.footer {
+    box-shadow: 0 -15px 15px -15px rgba(11, 12, 16, 0.3);
+    background: #333A46;
+    min-height: 120px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+
+.destinatario,
+.assunto {
     padding: .85rem 0;
     font-size: .875rem;
     border-bottom: 1px solid gainsboro;
@@ -9,25 +68,22 @@
     padding: 2rem 0;
 }
 
-.destinatario span, .assunto span{
+.destinatario span,
+.assunto span {
     color: #777;
 }
 
 .header-email {
     background: #404042;
-    padding: 1rem;
-    -webkit-border-radius: 8px 8px 0 0;
+    padding: .85rem 1rem;
     border-radius: 8px 8px 0 0;
     margin-top: 2rem;
     color: #fff;
 }
 
 .card-email {
-    -webkit-box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2);
-    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2);
+    border: 1px solid #ced4da;
     padding: 0 1.5rem 1.5rem;
+    background: #fff;
+    border-radius: 0 0 8px 8px;
 }
-
-
-
-    
