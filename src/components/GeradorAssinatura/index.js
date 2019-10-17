@@ -7,11 +7,15 @@ class GeradorAssinatura extends Component {
     this.state = {
       nome: 'Daniel Campos',
       empresa: 'Superlogica',
-      cargo: 'Head of Design',
+      cargo: 'Head de Design',
       telefone: '11 0000-0000',
-      assinatura: '',
-      image: 'https://secure.gravatar.com/avatar/8223e756567ed1117c78b33a752f08d2?s=96&d=mm&r=g'
+      image: 'https://secure.gravatar.com/avatar/8223e756567ed1117c78b33a752f08d2?s=96&d=mm&r=g',
+      copiarFonte: 'Copiar Código Fonte',
+      copiarAssinatura: 'Copiar Assinatura'
     };
+
+    this.copyToClip = this.copyToClip.bind(this);
+
   }
 
 
@@ -32,6 +36,7 @@ class GeradorAssinatura extends Component {
       return 'https://pjbank.com.br/assinaturas-de-email/linha.jpg';
 
     return 'https://www.superlogica.com/assinatura-de-email/linha-superlogica.jpg';
+
   }
 
   renderURL() {
@@ -55,15 +60,21 @@ class GeradorAssinatura extends Component {
   copyToClip() {
 
     function listener(e) {
-
       let str = document.getElementById('assinatura').innerHTML;
       e.clipboardData.setData("text/html", str);
       e.clipboardData.setData("text/plain", str);
       e.preventDefault();
     }
+
     document.addEventListener("copy", listener);
     document.execCommand("copy");
     document.removeEventListener("copy", listener);
+
+    this.setState({
+      copiarAssinatura: "Copiado! Agora é só instalar ;)"
+    });
+
+
   };
 
 
@@ -123,12 +134,12 @@ class GeradorAssinatura extends Component {
 
 
 
-          <button onClick={this.copyToClip}>
-            Copiar assinatura
+          <button type="button" onClick={this.copyToClip} className="btn btn-primary">
+            {this.state.copiarAssinatura}
           </button>
 
-          <button onClick={this.getAssinatura}>
-            Gerar código fonte
+          <button type="button" onClick={this.getAssinatura} className="btn btn-primary">
+            {this.state.copiarFonte}
           </button>
 
 
@@ -138,10 +149,10 @@ class GeradorAssinatura extends Component {
         <div className="col-12 col-lg-6 ml-auto">
           <div className="header-email">Nova Mensagem</div>
           <div className="card-email">
-            <div className="destinatario"><span>Para:</span> Daniel Campos</div>
+            <div className="destinatario"><span>Para:</span> Carlos Cera</div>
             <div className="assunto"><span>Assunto:</span> Nova assinatura</div>
             <div className="mensagem">
-              Olá Daniel,
+              Olá Carlos,
               <br /><br />
               Esse é um exemplo de e-mail criado no Gerador de Assinaturas de E-mail da Superlógica. Aqui dá para você ter uma ideia de como vai ficar a sua assinatura final.
               <br /><br />

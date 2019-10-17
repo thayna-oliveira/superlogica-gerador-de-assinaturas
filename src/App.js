@@ -4,13 +4,6 @@ import GeradorAssinatura from './components/GeradorAssinatura';
 
 class App extends Component {
 
-
-  
-  
-  
-
-
-
   render() {
     return (
       <div>
