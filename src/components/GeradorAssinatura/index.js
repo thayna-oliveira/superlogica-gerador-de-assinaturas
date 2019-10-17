@@ -9,6 +9,7 @@ class GeradorAssinatura extends Component {
       empresa: 'Superlogica',
       cargo: 'Head of Design',
       telefone: '11 0000-0000',
+      assinatura: '',
       image: 'https://secure.gravatar.com/avatar/8223e756567ed1117c78b33a752f08d2?s=96&d=mm&r=g'
     };
   }
@@ -17,7 +18,7 @@ class GeradorAssinatura extends Component {
   renderBrand() {
     let state = this.state.empresa;
 
-    if (state == 'pjbank')
+    if (state === 'pjbank')
       return 'https://pjbank.com.br/assinaturas-de-email/logo.jpg';
 
     return 'https://www.superlogica.com/assinatura-de-email/logo-superlogica.jpg';
@@ -27,7 +28,7 @@ class GeradorAssinatura extends Component {
 
     let state = this.state.empresa;
 
-    if (state == 'pjbank')
+    if (state === 'pjbank')
       return 'https://pjbank.com.br/assinaturas-de-email/linha.jpg';
 
     return 'https://www.superlogica.com/assinatura-de-email/linha-superlogica.jpg';
@@ -37,12 +38,33 @@ class GeradorAssinatura extends Component {
 
     let state = this.state.empresa;
 
-    if (state == 'pjbank')
+    if (state === 'pjbank')
       return 'https://pjbank.com.br/';
 
     return 'https://www.superlogica.com/';
   }
 
+  getAssinatura() {
+
+    let assinatura = document.getElementById('assinatura').innerHTML;
+
+    alert(assinatura);
+  }
+
+
+  copyToClip() {
+
+    function listener(e) {
+
+      let str = document.getElementById('assinatura').innerHTML;
+      e.clipboardData.setData("text/html", str);
+      e.clipboardData.setData("text/plain", str);
+      e.preventDefault();
+    }
+    document.addEventListener("copy", listener);
+    document.execCommand("copy");
+    document.removeEventListener("copy", listener);
+  };
 
 
   render() {
@@ -98,6 +120,19 @@ class GeradorAssinatura extends Component {
             </div>
 
           </form>
+
+
+
+          <button onClick={this.copyToClip}>
+            Copiar assinatura
+          </button>
+
+          <button onClick={this.getAssinatura}>
+            Gerar código fonte
+          </button>
+
+
+
         </div>
 
         <div className="col-12 col-lg-6 ml-auto">
@@ -112,13 +147,13 @@ class GeradorAssinatura extends Component {
               <br /><br />
               Abraços!
             </div>
-            <div className="assinatura">
+            <div className="assinatura" id="assinatura">
 
               <table>
                 <tbody>
                   <tr>
                     <td width="86"><img src={this.state.image} title={this.state.nome} alt={this.state.nome} width="86" height="105" /></td>
-                    <td width="30" align="center"><img src={this.renderLinha()} /></td>
+                    <td width="30" align="center"><img src={this.renderLinha()} alt="linha" /></td>
                     <td width="297" valign="top">
                       <p style={{ marginTop: '0px', marginBottom: '5px', lineHeight: '1.0' }}>
                         <strong style={{ fontSize: '22px', color: '#535353' }}>{this.state.nome}</strong></p>
@@ -137,9 +172,10 @@ class GeradorAssinatura extends Component {
           </div>
         </div>
 
+
         <div>
           {Object.keys(images).map(function (key) {
-            return <img src={images[key]}/>;
+            return <img src={images[key]} alt="" />;
           })}
         </div>
       </div>
