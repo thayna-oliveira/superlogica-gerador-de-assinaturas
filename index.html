@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Add React in One Minute</title>
+
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://use.typekit.net/thw4ntx.css" />
+  <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap-grid.min.css" />
+  <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="./assets/css/main.css" />
+</head>
+
+<body>
+
+
+  <div>
+
+    <div class="nav">
+      <div class="container">
+        <a href="https://superlogica.com" target="_blank">
+          <img
+            src="https://recorrencia.superlogica.com/hubfs/%5BGLOBAL%20ASSETS%5D/cards/2927_LP_tarifa_fixa/brand/superlogica.svg"
+            alt="Logo Superlógica" class="logo" />
+        </a>
+      </div>
+    </div>
+
+
+    <div class="hero">
+      <div class="container">
+        <div id="GeradorAssinaturas"></div>
+      </div>
+    </div>
+
+
+    <div class="footer">
+      <div class="container">
+        <p class="text-center text-white m-0">© 2019 Superlógica Tecnologias</p>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <!-- Load our React component. -->
+  <script src="./components/GeradorAssinaturas.js" type="text/babel"></script>
+
+</body>
+
+</html>

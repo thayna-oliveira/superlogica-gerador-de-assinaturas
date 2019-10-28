@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-
-class GeradorAssinatura extends Component {
+class GeradorAssinaturas extends React.Component {
 
   constructor(props) {
     super(props);
@@ -105,7 +103,7 @@ class GeradorAssinatura extends Component {
 
   render() {
 
-    const importAll = require =>
+    /*const importAll = require =>
       require.keys().reduce((acc, next) => {
         acc[next.replace("./", "")] = require(next);
         return acc;
@@ -113,7 +111,7 @@ class GeradorAssinatura extends Component {
 
     const images = importAll(
       require.context("/Users/thaynaoliveira/Desktop/Cards/2841 - Criacao de Assinaturas/superlogica-gerador-de-assinaturas/src/images", false, /\.(png|jpe?g|svg)$/)
-    );
+    ); */
 
 
     return (
@@ -154,7 +152,7 @@ class GeradorAssinatura extends Component {
                 placeholder="Telefone"
                 onChange={(e) => this.setState({ telefone: e.target.value })} />
 
-              <small id="helper-phone" class="form-text text-muted">Clique aqui e veja como inserir uma imagem.</small>
+              <small id="helper-phone" className="form-text text-muted">Clique aqui e veja como inserir uma imagem.</small>
 
             </div>
 
@@ -166,7 +164,7 @@ class GeradorAssinatura extends Component {
                 placeholder="www.endereco.com/imagem.png"
                 onChange={(e) => this.setState({ image: e.target.value })} />
 
-              <small id="helper-imagem" class="form-text text-muted">Clique aqui e veja como inserir uma imagem.</small>
+              <small id="helper-imagem" className="form-text text-muted">Clique aqui e veja como inserir uma imagem.</small>
             </div>
 
           </form>
@@ -221,15 +219,14 @@ class GeradorAssinatura extends Component {
         </div>
 
 
-        <div>
-          {Object.keys(images).map(function (key) {
-            return <img src={images[key]} alt="" />;
-          })}
-        </div>
+        
       </div>
     )
   }
 }
 
 
-export default GeradorAssinatura;
+ReactDOM.render(
+  <GeradorAssinaturas />,
+  document.getElementById('GeradorAssinaturas')
+);
