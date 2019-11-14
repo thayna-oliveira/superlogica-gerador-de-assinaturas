@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import GeradorAssinatura from './components/GeradorAssinatura';
+
+import GeradorAssinatura from './components/geradorAssinaturas';
 
 
 class App extends Component {

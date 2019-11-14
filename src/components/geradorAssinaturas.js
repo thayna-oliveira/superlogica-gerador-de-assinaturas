@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
+
+import Input from './input'; 
+
 class GeradorAssinatura extends Component {
 
   constructor(props) {
     super(props);
+    
     this.state = {
       nome: 'Daniel Campos',
       empresa: 'Superlogica',
@@ -69,7 +73,6 @@ class GeradorAssinatura extends Component {
       });
     }.bind(this), 2000);
 
-
   }
 
 
@@ -98,10 +101,7 @@ class GeradorAssinatura extends Component {
       });
     }.bind(this), 2000);
 
-
-
   };
-
 
   render() {
 
@@ -112,7 +112,7 @@ class GeradorAssinatura extends Component {
       }, {});
 
     const images = importAll(
-      require.context("/Users/thaynaoliveira/Desktop/Cards/2841 - Criacao de Assinaturas/superlogica-gerador-de-assinaturas/src/images", false, /\.(png|jpe?g|svg)$/)
+      require.context("/Users/thaynaoliveira/Desktop/Cards/2841 - Criacao de Assinaturas - React Build/superlogica-gerador-de-assinaturas/src/images", false, /\.(png|jpe?g|svg)$/)
     );
 
 
@@ -124,9 +124,12 @@ class GeradorAssinatura extends Component {
             <h2>Gerador de Assinatura</h2>
             <div className="form-group mb-3">
               <label>Insira seu nome e um sobrenome</label>
-              <input type="text" id="name" className="form-control"
+
+              <Input id="name"
+                type="text"
                 placeholder="Nome Sobrenome"
-                onChange={(e) => this.setState({ nome: e.target.value })} />
+                clickHandler={(e) => this.setState({ nome: e.target.value })} />
+
             </div>
 
             <div className="form-group mb-3">
@@ -141,18 +144,21 @@ class GeradorAssinatura extends Component {
 
             <div className="form-group mb-3">
               <label>Informe seu Cargo/Setor</label>
-              <input type="text" id="cargo" className="form-control"
+
+              <Input id="cargo"
+                type="text"
                 placeholder="Cargo/Setor"
-                onChange={(e) => this.setState({ cargo: e.target.value })} />
+                clickHandler={(e) => this.setState({ cargo: e.target.value })} />
+
             </div>
 
             <div className="form-group mb-3">
               <label>Insira seu Telefone</label>
-              <input type="phone" id="phone"
-                className="form-control"
-                aria-describedby="helper-phone"
+
+              <Input id="image"
+                type="phone"
                 placeholder="Telefone"
-                onChange={(e) => this.setState({ telefone: e.target.value })} />
+                clickHandler={(e) => this.setState({ telefone: e.target.value })} />
 
               <small id="helper-phone" class="form-text text-muted">Clique aqui e veja como inserir uma imagem.</small>
 
@@ -160,16 +166,18 @@ class GeradorAssinatura extends Component {
 
             <div className="form-group mb-5">
               <label>Insira o endereço da sua foto ou avatar</label>
-              <input type="text" id="image"
-                className="form-control"
+
+              <Input id="image"
+                type="text"
                 aria-describedby="helper"
                 placeholder="www.endereco.com/imagem.png"
-                onChange={(e) => this.setState({ image: e.target.value })} />
+                clickHandler={(e) => this.setState({ image: e.target.value })} />
 
               <small id="helper-imagem" class="form-text text-muted">Clique aqui e veja como inserir uma imagem.</small>
             </div>
 
           </form>
+
 
           <button type="button" onClick={this.getAssinatura}
             className={this.state.statusAssinatura ? "btn mr-2 btn-success" : "btn mr-2 btn-primary"} >
