@@ -1,41 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-import GeradorAssinatura from './components/geradorAssinaturas';
-
-
-class App extends Component {
-
-  render() {
-    return (
-      <div>
-
-        <div className="nav">
-          <div className="container">
-            <a href="https://superlogica.com" target="_blank">
-              <img src="https://recorrencia.superlogica.com/hubfs/%5BGLOBAL%20ASSETS%5D/cards/2927_LP_tarifa_fixa/brand/superlogica.svg" alt="Logo Superlógica" class="logo" />
-            </a>
-          </div>
-        </div>
-
-
-        <div className="hero">
-          <div className="container">
-            <GeradorAssinatura />
-          </div>
-        </div>
-
-
-        <div className="footer">
-          <div className="container">
-            <p className="text-center text-white m-0">© 2019 Superlógica Tecnologias</p>
-          </div>
-        </div>
-
-
-      </div>
-    )
-  }
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
-
 
 export default App;
