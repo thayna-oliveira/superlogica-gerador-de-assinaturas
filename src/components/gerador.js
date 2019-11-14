@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
-import Input from './input.js'; 
+import Input from './input.js';
+import FormInput from './form-input';
+import Button from './button';
 
 class Gerador extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.state = {
       nome: 'Daniel Campos',
       empresa: 'Superlogica',
@@ -121,51 +123,39 @@ class Gerador extends Component {
         <div className="col-12 col-lg-6">
           <form className="pr-lg-5">
             <h2>Gerador de Assinatura</h2>
-            <div className="form-group mb-3">
-              <label>Insira seu nome e um sobrenome</label>
 
+            <FormInput text={"Insira seu nome e um sobrenome"}>
               <Input id="name"
                 type="text"
                 placeholder="Nome Sobrenome"
                 clickHandler={(e) => this.setState({ nome: e.target.value })} />
+            </FormInput>
 
-            </div>
-
-            <div className="form-group mb-3">
-              <label>Informe sua empresa</label>
+            <FormInput text={"Informe sua empresa"}>
               <select className="form-control"
                 onChange={(e) => this.setState({ empresa: e.target.value })}>
                 <option value="">Selecione sua Empresa</option>
                 <option value="superlogica">Superlógica</option>
                 <option value="pjbank">PJBank</option>
               </select>
-            </div>
+            </FormInput>
 
-            <div className="form-group mb-3">
-              <label>Informe seu Cargo/Setor</label>
-
+            <FormInput text={"Informe seu Cargo/Setor"}>
               <Input id="cargo"
                 type="text"
                 placeholder="Cargo/Setor"
                 clickHandler={(e) => this.setState({ cargo: e.target.value })} />
+            </FormInput>
 
-            </div>
-
-            <div className="form-group mb-3">
-              <label>Insira seu Telefone</label>
-
+            <FormInput text={"Insira seu Telefone"}>
               <Input id="image"
                 type="phone"
                 placeholder="Telefone"
                 clickHandler={(e) => this.setState({ telefone: e.target.value })} />
-
               <small id="helper-phone" className="form-text text-muted">Clique aqui e veja como inserir uma imagem.</small>
+            </FormInput>
 
-            </div>
-
-            <div className="form-group mb-5">
-              <label>Insira o endereço da sua foto ou avatar</label>
-
+            <FormInput text={"Insira o endereço da sua foto ou avatar"}>
               <Input id="image"
                 type="text"
                 aria-describedby="helper"
@@ -173,20 +163,19 @@ class Gerador extends Component {
                 clickHandler={(e) => this.setState({ image: e.target.value })} />
 
               <small id="helper-imagem" className="form-text text-muted">Clique aqui e veja como inserir uma imagem.</small>
-            </div>
+            </FormInput>
 
           </form>
 
 
-          <button type="button" onClick={this.getAssinatura}
-            className={this.state.statusAssinatura ? "btn mr-2 btn-success" : "btn mr-2 btn-primary"} >
+          <Button clickHandler={this.getAssinatura} style={this.state.statusAssinatura ? "btn mr-2 btn-success" : "btn mr-2 btn-primary"}>
             {this.state.copiarAssinatura}
-          </button>
+          </Button>
 
-          <button type="button" onClick={this.getCodigoFonte}
-            className={this.state.statusFonte ? "btn mr-2 btn-success" : "btn mr-2 btn-primary"} >
-            {this.state.copiarFonte}
-          </button>
+          <Button clickHandler={this.getCodigoFonte} style={this.state.statusFonte ? "btn mr-2 btn-success" : "btn mr-2 btn-primary"}>
+          {this.state.copiarFonte}
+          </Button>
+
 
         </div>
 
@@ -228,7 +217,7 @@ class Gerador extends Component {
         </div>
 
 
-        
+
       </div>
     )
   }
