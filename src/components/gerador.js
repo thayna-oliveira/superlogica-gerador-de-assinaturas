@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import Input from './input.js';
 import FormInput from './form-input';
 import Button from './button';
+import Gallery from './gallery';
 
 class Gerador extends Component {
 
   constructor(props) {
+
     super(props);
 
     this.state = {
@@ -30,9 +32,9 @@ class Gerador extends Component {
     let state = this.state.empresa;
 
     if (state === 'pjbank')
-      return 'https://pjbank.com.br/assinaturas-de-email/logo.jpg';
+      return '/assets/img/logo-pjbank.jpg';
 
-    return 'https://www.superlogica.com/assinatura-de-email/logo-superlogica.jpg';
+    return '/assets/img/logo-superlogica.jpg';
   }
 
   renderLinha() {
@@ -40,9 +42,9 @@ class Gerador extends Component {
     let state = this.state.empresa;
 
     if (state === 'pjbank')
-      return 'https://pjbank.com.br/assinaturas-de-email/linha.jpg';
+      return '/assets/img/linha-pjbank.jpg';
 
-    return 'https://www.superlogica.com/assinatura-de-email/linha-superlogica.jpg';
+    return '/assets/img/linha-superlogica.jpg';
 
   }
 
@@ -76,7 +78,6 @@ class Gerador extends Component {
 
   }
 
-
   getAssinatura() {
 
     function listener(e) {
@@ -105,17 +106,6 @@ class Gerador extends Component {
   };
 
   render() {
-
-    const importAll = require =>
-      require.keys().reduce((acc, next) => {
-        acc[next.replace("./", "")] = require(next);
-        return acc;
-      }, {});
-
-    const images = importAll(
-      require.context("/Users/thaynaoliveira/Desktop/Cards/2841 - Criacao de Assinaturas - React Build/superlogica-gerador-de-assinaturas/src/images", false, /\.(png|jpe?g|svg)$/)
-    );
-
 
     return (
 
@@ -167,15 +157,19 @@ class Gerador extends Component {
 
           </form>
 
-
-          <Button clickHandler={this.getAssinatura} style={this.state.statusAssinatura ? "btn mr-2 btn-success" : "btn mr-2 btn-primary"}>
+          <Button
+            clickHandler={this.getAssinatura}
+            style={this.state.statusAssinatura ? "btn mr-2 btn-success" : "btn mr-2 btn-primary"}>
             {this.state.copiarAssinatura}
           </Button>
 
-          <Button clickHandler={this.getCodigoFonte} style={this.state.statusFonte ? "btn mr-2 btn-success" : "btn mr-2 btn-primary"}>
-          {this.state.copiarFonte}
+          <Button
+            clickHandler={this.getCodigoFonte}
+            style={this.state.statusFonte ? "btn mr-2 btn-success" : "btn mr-2 btn-primary"}>
+            {this.state.copiarFonte}
           </Button>
 
+          <Gallery />
 
         </div>
 
@@ -215,8 +209,6 @@ class Gerador extends Component {
             </div>
           </div>
         </div>
-
-
 
       </div>
     )
