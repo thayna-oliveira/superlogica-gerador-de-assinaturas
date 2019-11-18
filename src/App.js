@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Gerador from './components/gerador';
 
 function App() {
@@ -11,17 +12,9 @@ function App() {
 
       <Navbar logo={logo} alt="Logo Superlogica" />
 
-      <div className="hero">
-        <div className="container">
-          <Gerador />
-        </div>
-      </div>
+      <Gerador />
 
-      <div className="footer">
-        <div className="container">
-          <p className="text-center text-white m-0">© 2019 Superlógica Tecnologias</p>
-        </div>
-      </div>
+      <Footer year="2019" text="Superlógica Tecnologias" />
 
     </div>
   );

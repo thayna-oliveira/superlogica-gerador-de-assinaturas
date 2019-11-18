@@ -1,12 +1,14 @@
 import React from 'react';
 
+import Container from '../Container/';
+
 const Navbar = ({ logo, alt }) => (
     <div className="nav">
-        <div className="container">
+        <Container>
             <a href="https://superlogica.com" target="_blank">
                 <img src={logo} alt={alt} className="logo" />
             </a>
-        </div>
+        </Container>
     </div>
 );
 
