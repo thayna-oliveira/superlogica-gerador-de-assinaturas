@@ -122,6 +122,7 @@ class Gerador extends Component {
         <Container>
 
           <div className="row">
+
             <div className="col-12 col-lg-6">
               <form className="pr-lg-5">
                 <h2>Gerador de Assinatura</h2>
@@ -181,7 +182,7 @@ class Gerador extends Component {
                 {this.state.copiarFonte}
               </Button>
 
-              <Gallery callbackFromParent={this.handleData} />
+
 
 
             </div>
@@ -222,6 +223,8 @@ class Gerador extends Component {
                 </div>
               </div>
             </div>
+
+            <Gallery callbackFromParent={this.handleData} />
 
           </div>
 

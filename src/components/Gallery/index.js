@@ -40,20 +40,37 @@ class Gallery extends Component {
     render() {
 
         return (
-            <div>
-                {this.state.listOfImages.map((url, index) =>
-                    <GalleryItem
-                        key={index}
-                        src={url}
-                        alt="Foto"
-                        clickHandler={(e) => this.setState({ selectedImage: url })}></GalleryItem>
-                )}
+            <div className="gallery">
 
-                <Button
-                    clickHandler={(e) => this.submitHandler(e)}
-                    style="btn mr-2 btn-primary">
-                    Selecionar
-                </Button>
+                <div className="gallery-header">
+
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar..." aria-label="Search" />
+                    </form>
+
+                </div>
+
+                <div className="gallery-body">
+
+                    {this.state.listOfImages.map((url, index) =>
+                        <GalleryItem
+                            key={index}
+                            src={url}
+                            alt="Foto"
+                            clickHandler={(e) => this.setState({ selectedImage: url })}></GalleryItem>
+                    )}
+
+                </div>
+
+                <div className="gallery-footer">
+
+                    <Button
+                        clickHandler={(e) => this.submitHandler(e)}
+                        style="btn mr-2 btn-primary">
+                        Selecionar
+                    </Button>
+
+                </div>
 
             </div>
         )
