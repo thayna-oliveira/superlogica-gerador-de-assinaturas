@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import GalleryItem from './gallery-item';
+
+import GalleryItem from '../GalleryItem';
 
 class Gallery extends Component {
 
@@ -12,19 +13,30 @@ class Gallery extends Component {
             selectedImage: ''
         }
 
+        this.submitHandler = this.submitHandler.bind(this);
+
     }
 
     importAll(r) {
         return r.keys().map(r);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({
             listOfImages: this.importAll(require.context(
                 '/Users/thaynaoliveira/Desktop/Cards/superlogica-gerador-de-assinaturas/public/assets/avatar',
                 false,
                 /\.(png|jpe?g|svg)$/))
         });
+    }
+
+
+    submitHandler(evt) {
+
+        evt.preventDefault();
+
+        this.props.callbackFromParent(this.state.selectedImage);
+
     }
 
     render() {
@@ -40,7 +52,8 @@ class Gallery extends Component {
 
                 )}
 
-                <p>{this.state.selectedImage}</p>
+                <button className="btn btn-primary" type="button" onClick={(e) => this.submitHandler(e)}>clique aqui</button>
+                <p>Selected image: {this.state.selectedImage}</p>
             </div>
         )
     }

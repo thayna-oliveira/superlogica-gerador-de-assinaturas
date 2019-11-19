@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 
-import Input from './input.js';
-import FormInput from './form-input';
-import Button from './button';
-import Gallery from './gallery';
+import Container from '../Container';
+import Input from '../Input';
+import FormInput from '../FormInput';
+import Button from '../Button';
+import Gallery from '../Gallery';
 
 class Gerador extends Component {
 
   constructor(props) {
 
     super(props);
+
 
     this.state = {
       nome: 'Daniel Campos',
@@ -20,12 +22,20 @@ class Gerador extends Component {
       copiarFonte: 'Copiar Código Fonte',
       copiarAssinatura: 'Copiar Assinatura',
       statusAssinatura: 0,
-      statusFonte: 0
+      statusFonte: 0,
+      child: ''
     };
 
+    this.handleData = this.handleData.bind(this);
     this.getAssinatura = this.getAssinatura.bind(this);
     this.getCodigoFonte = this.getCodigoFonte.bind(this);
 
+  }
+
+  handleData(data) {
+    this.setState({
+      image: data
+    });
   }
 
   renderBrand() {
@@ -110,7 +120,7 @@ class Gerador extends Component {
     return (
 
       <div className="hero">
-        <div className="container">
+        <Container>
 
           <div className="row">
             <div className="col-12 col-lg-6">
@@ -172,7 +182,9 @@ class Gerador extends Component {
                 {this.state.copiarFonte}
               </Button>
 
-              <Gallery />
+              <Gallery callbackFromParent={this.handleData}/>
+              <small>RESULTADO</small>
+              {this.state.child}
 
             </div>
 
@@ -215,7 +227,8 @@ class Gerador extends Component {
 
           </div>
 
-        </div>
+        </Container>
+
       </div>
     )
   }

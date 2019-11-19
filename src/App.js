@@ -4,7 +4,7 @@ import './App.css';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Gerador from './components/gerador';
+import Gerador from './components/Gerador';
 
 function App() {
   return (
