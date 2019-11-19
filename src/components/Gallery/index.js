@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import GalleryItem from '../GalleryItem';
+import Button from '../Button';
+
 
 class Gallery extends Component {
 
@@ -30,13 +32,9 @@ class Gallery extends Component {
         });
     }
 
-
     submitHandler(evt) {
-
         evt.preventDefault();
-
         this.props.callbackFromParent(this.state.selectedImage);
-
     }
 
     render() {
@@ -49,11 +47,14 @@ class Gallery extends Component {
                         src={url}
                         alt="Foto"
                         clickHandler={(e) => this.setState({ selectedImage: url })}></GalleryItem>
-
                 )}
 
-                <button className="btn btn-primary" type="button" onClick={(e) => this.submitHandler(e)}>clique aqui</button>
-                <p>Selected image: {this.state.selectedImage}</p>
+                <Button
+                    clickHandler={(e) => this.submitHandler(e)}
+                    style="btn mr-2 btn-primary">
+                    Selecionar
+                </Button>
+
             </div>
         )
     }

@@ -12,7 +12,6 @@ class Gerador extends Component {
 
     super(props);
 
-
     this.state = {
       nome: 'Daniel Campos',
       empresa: 'Superlogica',
@@ -182,9 +181,8 @@ class Gerador extends Component {
                 {this.state.copiarFonte}
               </Button>
 
-              <Gallery callbackFromParent={this.handleData}/>
-              <small>RESULTADO</small>
-              {this.state.child}
+              <Gallery callbackFromParent={this.handleData} />
+
 
             </div>
 
