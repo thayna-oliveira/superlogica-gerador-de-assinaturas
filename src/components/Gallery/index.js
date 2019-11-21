@@ -27,7 +27,6 @@ class Gallery extends Component {
     this.state = {
       images: [],
       selectedImage: "",
-      teste: [],
       result: [...imageList],
     };
 
@@ -41,23 +40,19 @@ class Gallery extends Component {
   }
 
   componentDidMount() {
-
     let images = this.importAll(
       require.context(
         "/Users/thaynaoliveira/Desktop/Cards/superlogica-gerador-de-assinaturas/public/assets/avatar",
-        false,
+        true,
         /\.(png|jpe?g)$/
       )
     );
 
     this.setState({
-      images: images,
+      result: images,
     });
 
-    
-
     imageList = images;
-
   }
 
   submitHandler(evt) {
@@ -65,11 +60,11 @@ class Gallery extends Component {
     this.props.callbackFromParent(this.state.selectedImage);
   }
 
-  getMatchedList = (searchText) => {
+  getMatchedList = searchText => {
     if (TypeChecker.isEmpty(searchText)) return imageList;
     return imageList.filter(item => item.includes(searchText));
-  }
-  
+  };
+
   onSearchImage(value) {
     this.setState({
       result: this.getMatchedList(value),
@@ -81,7 +76,6 @@ class Gallery extends Component {
       <div className="gallery">
         <div className="gallery-header">
           <div className="react-search-field-demo container">
-            
             <div>
               <SearchField
                 placeholder="Search item"
@@ -89,7 +83,7 @@ class Gallery extends Component {
                 onEnter={this.onSearchImage}
                 onSearchClick={this.onSearchImage}
               />
- {console.log("Result: " + this.state.result)}
+
               <ImageList list={this.state.result} />
             </div>
           </div>
