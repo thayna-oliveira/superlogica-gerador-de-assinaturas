@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 
-const Button = (props) => (
-    <button type="button"
-        onClick={props.clickHandler}
-        className={props.style}>
+const Button = props => (
+  <button type="button" onClick={props.clickHandler} className={props.style}>
     {props.children}
   </button>
 );

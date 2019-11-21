@@ -1,81 +1,117 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import GalleryItem from '../GalleryItem';
-import Button from '../Button';
+import GalleryItem from "../GalleryItem";
+import Button from "../Button";
+import SearchField from "../SearchField";
+import TypeChecker from "typeco";
 
+let imageList = [];
+
+const ImageList = props => (
+  <div className="list-example">
+    <div className="list-header"></div>
+    <div className="list-body">
+      {props.list.map((item, index) => (
+        <ul key={index}>
+          <li> {item} </li>
+        </ul>
+      ))}
+    </div>
+  </div>
+);
 
 class Gallery extends Component {
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
+    this.state = {
+      images: [],
+      selectedImage: "",
+      teste: [],
+      result: [...imageList],
+    };
 
-        super(props);
+    this.submitHandler = this.submitHandler.bind(this);
+    this.onSearchImage = this.onSearchImage.bind(this);
+    this.getMatchedList = this.getMatchedList.bind(this);
+  }
 
-        this.state = {
-            listOfImages: [],
-            selectedImage: ''
-        }
+  importAll(r) {
+    return r.keys().map(r);
+  }
 
-        this.submitHandler = this.submitHandler.bind(this);
+  componentDidMount() {
 
-    }
+    let images = this.importAll(
+      require.context(
+        "/Users/thaynaoliveira/Desktop/Cards/superlogica-gerador-de-assinaturas/public/assets/avatar",
+        false,
+        /\.(png|jpe?g)$/
+      )
+    );
 
-    importAll(r) {
-        return r.keys().map(r);
-    }
+    this.setState({
+      images: images,
+    });
 
-    componentDidMount() {
-        this.setState({
-            listOfImages: this.importAll(require.context(
-                '/Users/thaynaoliveira/Desktop/Cards/superlogica-gerador-de-assinaturas/public/assets/avatar',
-                false,
-                /\.(png|jpe?g|svg)$/))
-        });
-    }
+    
 
-    submitHandler(evt) {
-        evt.preventDefault();
-        this.props.callbackFromParent(this.state.selectedImage);
-    }
+    imageList = images;
 
-    render() {
+  }
 
-        return (
-            <div className="gallery">
+  submitHandler(evt) {
+    evt.preventDefault();
+    this.props.callbackFromParent(this.state.selectedImage);
+  }
 
-                <div className="gallery-header">
+  getMatchedList = (searchText) => {
+    if (TypeChecker.isEmpty(searchText)) return imageList;
+    return imageList.filter(item => item.includes(searchText));
+  }
+  
+  onSearchImage(value) {
+    this.setState({
+      result: this.getMatchedList(value),
+    });
+  }
 
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar..." aria-label="Search" />
-                    </form>
-
-                </div>
-
-                <div className="gallery-body">
-
-                    {this.state.listOfImages.map((url, index) =>
-                        <GalleryItem
-                            key={index}
-                            src={url}
-                            alt="Foto"
-                            clickHandler={(e) => this.setState({ selectedImage: url })}></GalleryItem>
-                    )}
-
-                </div>
-
-                <div className="gallery-footer">
-
-                    <Button
-                        clickHandler={(e) => this.submitHandler(e)}
-                        style="btn mr-2 btn-primary">
-                        Selecionar
-                    </Button>
-
-                </div>
-
+  render() {
+    return (
+      <div className="gallery">
+        <div className="gallery-header">
+          <div className="react-search-field-demo container">
+            
+            <div>
+              <SearchField
+                placeholder="Search item"
+                onChange={this.onSearchImage}
+                onEnter={this.onSearchImage}
+                onSearchClick={this.onSearchImage}
+              />
+ {console.log("Result: " + this.state.result)}
+              <ImageList list={this.state.result} />
             </div>
-        )
-    }
-}
+          </div>
+        </div>
 
+        <div className="gallery-body">
+          {this.state.result.map((url, index) => (
+            <GalleryItem
+              key={index}
+              src={url}
+              alt="Foto"
+              clickHandler={e => this.setState({ selectedImage: url })}
+            ></GalleryItem>
+          ))}
+        </div>
+
+        <div className="gallery-footer">
+          <Button clickHandler={e => this.submitHandler(e)}>Selecionar</Button>
+        </div>
+      </div>
+    );
+  }
+}
 
 export default Gallery;
