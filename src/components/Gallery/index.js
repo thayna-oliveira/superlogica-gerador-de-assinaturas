@@ -79,58 +79,57 @@ class Gallery extends Component {
 
   render() {
     return (
-      <div className="gallery">
-        <div className="gallery-header">
-          <div className="react-search-field-demo container">
+      <div>
+        <button
+          type="button"
+          className="btn btn-primary"
+          data-toggle="modal"
+          data-target="#modalExemplo"
+          id="centered-toggle-button"
+          onClick={e => {
+            this.showModal(e);
+          }}
+        >
+          show Modal
+        </button>
 
-            
-            <button
-              className="toggle-button"
-              id="centered-toggle-button"
-              onClick={e => {
-                this.showModal(e);
-              }}
-            >
-              {" "}
-              show Modal{" "}
-            </button>
+        <Modal
+          onClose={this.showModal}
+          show={this.state.showModal}
+          title="Selecione seu avatar"
+        >
+          <div className="gallery">
+            <div className="gallery-header">
+              <div className="react-search-field-demo container">
+                <div>
+                  <SearchField
+                    placeholder="Search item"
+                    onChange={this.onSearchImage}
+                    onEnter={this.onSearchImage}
+                    onSearchClick={this.onSearchImage}
+                  />
+                </div>
+              </div>
+            </div>
 
-            <Modal
-            onClose={this.showModal}
-            show={this.state.showModal}
-            title="Selecione seu avatar">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
-              deserunt corrupti, ut fugit magni qui quasi nisi amet repellendus
-              non fuga omnis a sed impedit explicabo accusantium nihil
-              doloremque consequuntur.
-            </Modal>
+            <div className="gallery-body">
+              {this.state.result.map((url, index) => (
+                <GalleryItem
+                  key={index}
+                  src={url}
+                  alt="Foto"
+                  clickHandler={e => this.setState({ selectedImage: url })}
+                ></GalleryItem>
+              ))}
+            </div>
 
-            <h2>Pesquisa: {this.state.teste}</h2>
-            <div>
-              <SearchField
-                placeholder="Search item"
-                onChange={this.onSearchImage}
-                onEnter={this.onSearchImage}
-                onSearchClick={this.onSearchImage}
-              />
+            <div className="gallery-footer">
+              <Button clickHandler={e => this.submitHandler(e)}>
+                Selecionar
+              </Button>
             </div>
           </div>
-        </div>
-
-        <div className="gallery-body">
-          {this.state.result.map((url, index) => (
-            <GalleryItem
-              key={index}
-              src={url}
-              alt="Foto"
-              clickHandler={e => this.setState({ selectedImage: url })}
-            ></GalleryItem>
-          ))}
-        </div>
-
-        <div className="gallery-footer">
-          <Button clickHandler={e => this.submitHandler(e)}>Selecionar</Button>
-        </div>
+        </Modal>
       </div>
     );
   }
