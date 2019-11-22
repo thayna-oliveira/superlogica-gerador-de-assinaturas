@@ -2,21 +2,9 @@ import React, { Component } from "react";
 
 import GalleryItem from "../GalleryItem";
 import Button from "../Button";
+import Modal from "../Modal";
 import SearchField from "../SearchField";
 import TypeChecker from "typeco";
-
-const ImageList = props => (
-  <div className="list-example">
-    <div className="list-header"></div>
-    <div className="list-body">
-      {props.list.map((item, index) => (
-        <ul key={index}>
-          <li> {item} </li>
-        </ul>
-      ))}
-    </div>
-  </div>
-);
 
 class Gallery extends Component {
   constructor(props) {
@@ -26,7 +14,7 @@ class Gallery extends Component {
       images: [],
       selectedImage: "",
       result: [],
-      teste: ''
+      showModal: false,
     };
 
     this.submitHandler = this.submitHandler.bind(this);
@@ -37,6 +25,12 @@ class Gallery extends Component {
   importAll(r) {
     return r.keys().map(r);
   }
+
+  showModal = e => {
+    this.setState({
+      showModal: !this.state.showModal,
+    });
+  };
 
   componentDidMount() {
     let images = this.importAll(
@@ -59,11 +53,10 @@ class Gallery extends Component {
   }
 
   getMatchedList = searchText => {
-
     let search = searchText
-    .toUpperCase()
-    .replace(/(\/?[\w\-_\/]*\/+)/g, "")
-    .replace(/(\.[\w-_]+)(\.[\w-_]+)/g, "");
+      .toUpperCase()
+      .replace(/(\/?[\w\-_\/]*\/+)/g, "")
+      .replace(/(\.[\w-_]+)(\.[\w-_]+)/g, "");
 
     let imageList = this.state.images;
 
@@ -89,6 +82,29 @@ class Gallery extends Component {
       <div className="gallery">
         <div className="gallery-header">
           <div className="react-search-field-demo container">
+
+            
+            <button
+              className="toggle-button"
+              id="centered-toggle-button"
+              onClick={e => {
+                this.showModal(e);
+              }}
+            >
+              {" "}
+              show Modal{" "}
+            </button>
+
+            <Modal
+            onClose={this.showModal}
+            show={this.state.showModal}
+            title="Selecione seu avatar">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
+              deserunt corrupti, ut fugit magni qui quasi nisi amet repellendus
+              non fuga omnis a sed impedit explicabo accusantium nihil
+              doloremque consequuntur.
+            </Modal>
+
             <h2>Pesquisa: {this.state.teste}</h2>
             <div>
               <SearchField
@@ -97,7 +113,6 @@ class Gallery extends Component {
                 onEnter={this.onSearchImage}
                 onSearchClick={this.onSearchImage}
               />
-
             </div>
           </div>
         </div>
