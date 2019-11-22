@@ -5,8 +5,6 @@ import Button from "../Button";
 import SearchField from "../SearchField";
 import TypeChecker from "typeco";
 
-let imageList = [];
-
 const ImageList = props => (
   <div className="list-example">
     <div className="list-header"></div>
@@ -27,7 +25,8 @@ class Gallery extends Component {
     this.state = {
       images: [],
       selectedImage: "",
-      result: [...imageList],
+      result: [],
+      teste: ''
     };
 
     this.submitHandler = this.submitHandler.bind(this);
@@ -43,16 +42,15 @@ class Gallery extends Component {
     let images = this.importAll(
       require.context(
         "/Users/thaynaoliveira/Desktop/Cards/superlogica-gerador-de-assinaturas/public/assets/avatar",
-        true,
+        false,
         /\.(png|jpe?g)$/
       )
     );
 
     this.setState({
+      images: images,
       result: images,
     });
-
-    imageList = images;
   }
 
   submitHandler(evt) {
@@ -61,8 +59,23 @@ class Gallery extends Component {
   }
 
   getMatchedList = searchText => {
-    if (TypeChecker.isEmpty(searchText)) return imageList;
-    return imageList.filter(item => item.includes(searchText));
+
+    let search = searchText
+    .toUpperCase()
+    .replace(/(\/?[\w\-_\/]*\/+)/g, "")
+    .replace(/(\.[\w-_]+)(\.[\w-_]+)/g, "");
+
+    let imageList = this.state.images;
+
+    if (TypeChecker.isEmpty(search)) return imageList;
+
+    return imageList.filter(item =>
+      item
+        .toUpperCase()
+        .replace(/(\/?[\w\-_\/]*\/+)/g, "")
+        .replace(/(\.[\w-_]+)(\.[\w-_]+)/g, "")
+        .includes(search)
+    );
   };
 
   onSearchImage(value) {
@@ -76,6 +89,7 @@ class Gallery extends Component {
       <div className="gallery">
         <div className="gallery-header">
           <div className="react-search-field-demo container">
+            <h2>Pesquisa: {this.state.teste}</h2>
             <div>
               <SearchField
                 placeholder="Search item"
@@ -84,7 +98,6 @@ class Gallery extends Component {
                 onSearchClick={this.onSearchImage}
               />
 
-              <ImageList list={this.state.result} />
             </div>
           </div>
         </div>
