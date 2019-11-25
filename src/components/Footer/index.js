@@ -1,15 +1,17 @@
 import React from "react";
 
-import Container from "../Container/";
+import { Container, Row } from "reactstrap";
 
 const Footer = ({ year, text }) => (
-    <div className="footer">
-        <Container>
-            <p className="text-center m-0">
-                © {year} {text} 
-            </p>
-        </Container>
-    </div>
+  <div className="footer">
+    <Container>
+      <Row>
+        <div className="text-center">
+          © {year} {text}
+        </div>
+      </Row>
+    </Container>
+  </div>
 );
 
 export default Footer;

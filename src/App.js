@@ -1,16 +1,15 @@
 import React from "react";
-import logo from "./logo.svg";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Main from "./components/Gerador";
+import Signature from "./components/Signature";
 
 function App() {
   return (
     <div>
       <Header />
 
-      <Main />
+      <Signature />
 
       <Footer year="2019" text="Superlógica Tecnologias" />
     </div>

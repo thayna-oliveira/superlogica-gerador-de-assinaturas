@@ -1,11 +1,17 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 
-import GalleryItem from "../GalleryItem";
-import SearchField from "../SearchField";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import TypeChecker from "typeco";
+import SearchField from "../Search";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Spinner,
+} from "reactstrap";
 
-class Gallery extends Component {
+class ImageSelector extends Component {
   constructor(props) {
     super(props);
 
@@ -14,6 +20,7 @@ class Gallery extends Component {
       selectedImage: "",
       result: [],
       modal: false,
+      isLoading: true,
     };
 
     this.submitHandler = this.submitHandler.bind(this);
@@ -27,7 +34,7 @@ class Gallery extends Component {
   }
 
   componentDidMount() {
-    let images = this.importAll(
+    let list = this.importAll(
       require.context(
         "/Users/thaynaoliveira/Desktop/Cards/superlogica-gerador-de-assinaturas/public/assets/avatar",
         false,
@@ -36,9 +43,13 @@ class Gallery extends Component {
     );
 
     this.setState({
-      images: images,
-      result: images,
+      images: list,
+      result: list.slice(0, 9),
     });
+
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 2500);
   }
 
   submitHandler(evt) {
@@ -50,17 +61,19 @@ class Gallery extends Component {
   getMatchedList = searchText => {
     let search = searchText
       .toUpperCase()
-      .replace(/(\/?[\w\-_\/]*\/+)/g, "")
+      .replace(/(\/?[\w\-_/]*\/+)/g, "")
       .replace(/(\.[\w-_]+)(\.[\w-_]+)/g, "");
 
     let imageList = this.state.images;
 
-    if (TypeChecker.isEmpty(search)) return imageList;
+    if (TypeChecker.isEmpty(search)) {
+      return imageList.slice(0, 6);
+    }
 
     return imageList.filter(item =>
       item
         .toUpperCase()
-        .replace(/(\/?[\w\-_\/]*\/+)/g, "")
+        .replace(/(\?[\w\-_/]*\/+)/g, "")
         .replace(/(\.[\w-_]+)(\.[\w-_]+)/g, "")
         .includes(search)
     );
@@ -80,34 +93,39 @@ class Gallery extends Component {
     return (
       <div>
         <Button color="danger" onClick={this.toggle}>
-          dfsd
+          Procurar imagem
         </Button>
         <Modal isOpen={modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Selecione um avatar</ModalHeader>
           <ModalBody>
-            <div className="gallery">
-              <div className="gallery-header">
-                <SearchField
-                  placeholder="Search item"
-                  onChange={this.onSearchImage}
-                  onEnter={this.onSearchImage}
-                  onSearchClick={this.onSearchImage}
-                />
-              </div>
+            {this.state.isLoading ? (
+              <Spinner color="secondary" />
+            ) : (
+              <div className="gallery">
+                <div className="gallery-header">
+                  <SearchField
+                    placeholder="Search item"
+                    onChange={this.onSearchImage}
+                    onEnter={this.onSearchImage}
+                    onSearchClick={this.onSearchImage}
+                  />
+                </div>
 
-              <div className="container">
-                <div className="gallery-body row">
-                  {this.state.result.map((url, index) => (
-                    <GalleryItem
-                      key={index}
-                      src={url}
-                      alt="Foto"
-                      clickHandler={e => this.setState({ selectedImage: url })}
-                    ></GalleryItem>
-                  ))}
+                <div className="container">
+                  <div className="gallery-body row">
+                    {this.state.result.map((url, index) => (
+                      <div
+                        className="col-4"
+                        key={index}
+                        onClick={e => this.setState({ selectedImage: url })}
+                      >
+                        <img className="avatar" src={url} alt="Foto"></img>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={e => this.submitHandler(e)}>
@@ -123,4 +141,4 @@ class Gallery extends Component {
   }
 }
 
-export default Gallery;
+export default ImageSelector;

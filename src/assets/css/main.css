@@ -56,11 +56,11 @@ input {
 }
 
 .footer {
-  background: #fff;
-  min-height: 120px;
+  background: #fbfbfb;
+  min-height: 70px;
   display: flex;
   flex-wrap: wrap;
-  border-top: 1px solid #ced4da;
+  border-top: 1px solid #f3f3f3;
   align-items: center;
 }
 
@@ -85,6 +85,7 @@ input {
 .destinatario span,
 .assunto span {
   color: #777;
+  font-weight: 600;
 }
 
 .header-email {
@@ -101,4 +102,19 @@ input {
   background: #fff;
   border-radius: 0 0 8px 8px;
   box-shadow: 0 20px 20px -15px rgba(11, 12, 16, 0.2);
+}
+
+.gallery-body {
+  overflow-y: scroll;
+  height: 350px;
+}
+
+.avatar {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.65rem 0;
+}
+
+.gallery-header {
+  padding: 0 .85rem .85rem;
 }
