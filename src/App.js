@@ -1,20 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from "react";
 
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Gerador from './components/Gerador';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Signature from "./components/Signature";
 
 function App() {
   return (
     <div>
+      <Header />
 
-      <Navbar logo={logo} alt="Logo Superlogica" />
-
-      <Gerador />
+      <Signature />
 
       <Footer year="2019" text="Superlógica Tecnologias" />
-
     </div>
   );
 }

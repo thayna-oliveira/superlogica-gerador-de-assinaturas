@@ -1,12 +1,19 @@
 import React, { Component } from "react";
 
-import Container from "../Container";
-import Input from "../Input";
-import FormInput from "../FormInput";
-import Button from "../Button";
-import Gallery from "../Gallery";
+import ImageSelector from "../ImageSelector";
 
-class Gerador extends Component {
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+} from "reactstrap";
+
+class Signature extends Component {
   constructor(props) {
     super(props);
 
@@ -112,100 +119,81 @@ class Gerador extends Component {
     return (
       <div className="hero">
         <Container>
-          <div className="row">
-            <div className="col-12 col-lg-6">
-              <form className="pr-lg-5">
-                <h2>Gerador de Assinatura</h2>
-
-                <FormInput text={"Insira seu nome e um sobrenome"}>
+          <Row>
+            <Col lg="6">
+              <Form className="pr-lg-5">
+                <FormGroup>
+                  <Label for="name">Nome e Sobrenome</Label>
                   <Input
-                    id="name"
                     type="text"
+                    name="name"
+                    id="name"
                     placeholder="Nome Sobrenome"
-                    clickHandler={e => this.setState({ nome: e.target.value })}
+                    onChange={e => this.setState({ nome: e.target.value })}
                   />
-                </FormInput>
+                </FormGroup>
 
-                <FormInput text={"Informe sua empresa"}>
-                  <select
-                    className="form-control"
+                <FormGroup>
+                  <Label for="exampleSelect">Selecione sua empresa</Label>
+                  <Input
+                    type="select"
+                    name="select"
+                    id="exampleSelect"
                     onChange={e => this.setState({ empresa: e.target.value })}
                   >
-                    <option value="">Selecione sua Empresa</option>
+                    <option value="">Selecionar...</option>
                     <option value="superlogica">Superlógica</option>
                     <option value="pjbank">PJBank</option>
-                  </select>
-                </FormInput>
+                  </Input>
+                </FormGroup>
 
-                <FormInput text={"Informe seu Cargo/Setor"}>
+                <FormGroup>
+                  <Label for="cargo">Cargo/Setor</Label>
                   <Input
+                    type="text"
+                    name="cargo"
                     id="cargo"
-                    type="text"
-                    placeholder="Cargo/Setor"
-                    clickHandler={e => this.setState({ cargo: e.target.value })}
+                    placeholder="Informe seu Cargo/Setor"
+                    onChange={e => this.setState({ cargo: e.target.value })}
                   />
-                </FormInput>
+                </FormGroup>
 
-                <FormInput text={"Insira seu Telefone"}>
+                <FormGroup>
+                  <Label for="cargo">Telefone</Label>
                   <Input
-                    id="image"
                     type="phone"
-                    placeholder="Telefone"
-                    clickHandler={e =>
-                      this.setState({ telefone: e.target.value })
-                    }
+                    name="cargo"
+                    id="cargo"
+                    placeholder="Insira seu Telefone"
+                    onChange={e => this.setState({ telefone: e.target.value })}
                   />
-                  <small id="helper-phone" className="form-text text-muted">
-                    Clique aqui e veja como inserir uma imagem.
-                  </small>
-                </FormInput>
+                </FormGroup>
 
-                <FormInput text={"Insira o endereço da sua foto ou avatar"}>
-                  <Input
-                    id="image"
-                    type="text"
-                    aria-describedby="helper"
-                    placeholder="www.endereco.com/imagem.png"
-                    clickHandler={e => this.setState({ image: e.target.value })}
-                  />
-
-                  <small id="helper-imagem" className="form-text text-muted">
-                    Clique aqui e veja como inserir uma imagem.
-                  </small>
-                </FormInput>
-              </form>
-
-              <Button
-                clickHandler={this.getAssinatura}
-                style={
-                  this.state.statusAssinatura
-                    ? "btn mr-2 btn-success"
-                    : "btn mr-2 btn-primary"
-                }
-              >
+                <FormGroup>
+                  <Label>Telefone</Label>
+                  <ImageSelector callbackFromParent={this.handleData} />
+                </FormGroup>
+              </Form>
+              <Button color="primary" onClick={this.getAssinatura}>
                 {this.state.copiarAssinatura}
-              </Button>
-
+              </Button>{" "}
               <Button
+                outline
+                color="primary"
                 clickHandler={this.getCodigoFonte}
-                style={
-                  this.state.statusFonte
-                    ? "btn mr-2 btn-success"
-                    : "btn mr-2 btn-primary"
-                }
               >
                 {this.state.copiarFonte}
               </Button>
-            </div>
+            </Col>
 
-            <div className="col-12 col-lg-6 ml-auto">
+            <Col lg="6" className="ml-auto">
               <div className="header-email">Nova Mensagem</div>
               <div className="card-email">
                 <div className="destinatario">
-                  <span>Para:</span> Carlos Cera
+                  <span>Para:</span> Seu destinatário
                 </div>
                 <div className="assunto">
-                  <span>Assunto:</span> Nova assinatura
+                  <span>Assunto:</span> Veja minha nova assinatura de e-mail
                 </div>
                 <div className="mensagem">
                   Olá Carlos,
@@ -308,14 +296,12 @@ class Gerador extends Component {
                   </table>
                 </div>
               </div>
-            </div>
-
-            <Gallery callbackFromParent={this.handleData} />
-          </div>
+            </Col>
+          </Row>
         </Container>
       </div>
     );
   }
 }
 
-export default Gerador;
+export default Signature;
