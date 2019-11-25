@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 
 import GalleryItem from "../GalleryItem";
-import Button from "../Button";
-import Modal from "../Modal";
 import SearchField from "../SearchField";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import TypeChecker from "typeco";
 
 class Gallery extends Component {
@@ -14,23 +13,18 @@ class Gallery extends Component {
       images: [],
       selectedImage: "",
       result: [],
-      showModal: false,
+      modal: false,
     };
 
     this.submitHandler = this.submitHandler.bind(this);
     this.onSearchImage = this.onSearchImage.bind(this);
     this.getMatchedList = this.getMatchedList.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   importAll(r) {
     return r.keys().map(r);
   }
-
-  showModal = e => {
-    this.setState({
-      showModal: !this.state.showModal,
-    });
-  };
 
   componentDidMount() {
     let images = this.importAll(
@@ -50,6 +44,7 @@ class Gallery extends Component {
   submitHandler(evt) {
     evt.preventDefault();
     this.props.callbackFromParent(this.state.selectedImage);
+    this.toggle();
   }
 
   getMatchedList = searchText => {
@@ -77,58 +72,51 @@ class Gallery extends Component {
     });
   }
 
+  toggle = () => this.setState({ modal: !this.state.modal });
+
   render() {
+    let modal = this.state.modal;
+
     return (
       <div>
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-toggle="modal"
-          data-target="#modalExemplo"
-          id="centered-toggle-button"
-          onClick={e => {
-            this.showModal(e);
-          }}
-        >
-          show Modal
-        </button>
+        <Button color="danger" onClick={this.toggle}>
+          dfsd
+        </Button>
+        <Modal isOpen={modal} toggle={this.toggle}>
+          <ModalHeader toggle={this.toggle}>Selecione um avatar</ModalHeader>
+          <ModalBody>
+            <div className="gallery">
+              <div className="gallery-header">
+                <SearchField
+                  placeholder="Search item"
+                  onChange={this.onSearchImage}
+                  onEnter={this.onSearchImage}
+                  onSearchClick={this.onSearchImage}
+                />
+              </div>
 
-        <Modal
-          onClose={this.showModal}
-          show={this.state.showModal}
-          title="Selecione seu avatar"
-        >
-          <div className="gallery">
-            <div className="gallery-header">
-              <div className="react-search-field-demo container">
-                <div>
-                  <SearchField
-                    placeholder="Search item"
-                    onChange={this.onSearchImage}
-                    onEnter={this.onSearchImage}
-                    onSearchClick={this.onSearchImage}
-                  />
+              <div className="container">
+                <div className="gallery-body row">
+                  {this.state.result.map((url, index) => (
+                    <GalleryItem
+                      key={index}
+                      src={url}
+                      alt="Foto"
+                      clickHandler={e => this.setState({ selectedImage: url })}
+                    ></GalleryItem>
+                  ))}
                 </div>
               </div>
             </div>
-
-            <div className="gallery-body">
-              {this.state.result.map((url, index) => (
-                <GalleryItem
-                  key={index}
-                  src={url}
-                  alt="Foto"
-                  clickHandler={e => this.setState({ selectedImage: url })}
-                ></GalleryItem>
-              ))}
-            </div>
-
-            <div className="gallery-footer">
-              <Button clickHandler={e => this.submitHandler(e)}>
-                Selecionar
-              </Button>
-            </div>
-          </div>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={e => this.submitHandler(e)}>
+              Selecionar
+            </Button>{" "}
+            <Button color="secondary" onClick={this.toggle}>
+              Cancelar
+            </Button>
+          </ModalFooter>
         </Modal>
       </div>
     );

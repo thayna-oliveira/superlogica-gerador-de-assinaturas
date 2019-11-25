@@ -5,8 +5,10 @@ import Input from "../Input";
 import FormInput from "../FormInput";
 import Button from "../Button";
 import Gallery from "../Gallery";
+import ImageSelector from "../ImageSelector";
 
 class Gerador extends Component {
+
   constructor(props) {
     super(props);
 
@@ -111,6 +113,8 @@ class Gerador extends Component {
   render() {
     return (
       <div className="hero">
+        <Gallery callbackFromParent={this.handleData}/>
+
         <Container>
           <div className="col-12 col-lg-6">
             <form className="pr-lg-5">
@@ -307,7 +311,7 @@ class Gerador extends Component {
             </div>
           </div>
 
-          <Gallery callbackFromParent={this.handleData} />
+          
         </Container>
       </div>
     );

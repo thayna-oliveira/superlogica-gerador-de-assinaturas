@@ -10,6 +10,7 @@ const searchFieldStyle = {
   display: "inline-flex",
   justifyContent: "space-between",
   height: SEARCH_BUTTON_EDGE,
+  width: "100%"
 };
 
 const searchFieldButtonStyle = {
