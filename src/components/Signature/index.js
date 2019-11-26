@@ -123,18 +123,18 @@ class Signature extends Component {
             <Col lg="6">
               <Form className="pr-lg-5">
                 <FormGroup>
-                  <Label for="name">Nome e Sobrenome</Label>
+                  <Label for="name">Nome</Label>
                   <Input
                     type="text"
                     name="name"
                     id="name"
-                    placeholder="Nome Sobrenome"
+                    placeholder="Nome"
                     onChange={e => this.setState({ nome: e.target.value })}
                   />
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="exampleSelect">Selecione sua empresa</Label>
+                  <Label for="exampleSelect">Empresa</Label>
                   <Input
                     type="select"
                     name="select"
@@ -153,7 +153,7 @@ class Signature extends Component {
                     type="text"
                     name="cargo"
                     id="cargo"
-                    placeholder="Informe seu Cargo/Setor"
+                    placeholder="Cargo/Setor"
                     onChange={e => this.setState({ cargo: e.target.value })}
                   />
                 </FormGroup>
@@ -164,24 +164,20 @@ class Signature extends Component {
                     type="phone"
                     name="cargo"
                     id="cargo"
-                    placeholder="Insira seu Telefone"
+                    placeholder="Telefone"
                     onChange={e => this.setState({ telefone: e.target.value })}
                   />
                 </FormGroup>
 
                 <FormGroup>
-                  <Label>Telefone</Label>
+                  <Label>Avatar</Label>
                   <ImageSelector callbackFromParent={this.handleData} />
                 </FormGroup>
               </Form>
               <Button color="primary" onClick={this.getAssinatura}>
                 {this.state.copiarAssinatura}
               </Button>{" "}
-              <Button
-                outline
-                color="primary"
-                clickHandler={this.getCodigoFonte}
-              >
+              <Button color="primary" clickHandler={this.getCodigoFonte}>
                 {this.state.copiarFonte}
               </Button>
             </Col>

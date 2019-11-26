@@ -92,11 +92,11 @@ class ImageSelector extends Component {
 
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>
+        <Button color="secondary" onClick={this.toggle}>
           Procurar imagem
         </Button>
         <Modal isOpen={modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Selecione um avatar</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Selecione seu avatar</ModalHeader>
           <ModalBody>
             {this.state.isLoading ? (
               <Spinner color="secondary" />
@@ -104,7 +104,7 @@ class ImageSelector extends Component {
               <div className="gallery">
                 <div className="gallery-header">
                   <SearchField
-                    placeholder="Search item"
+                    placeholder="Pesquise seu avatar"
                     onChange={this.onSearchImage}
                     onEnter={this.onSearchImage}
                     onSearchClick={this.onSearchImage}
@@ -113,15 +113,19 @@ class ImageSelector extends Component {
 
                 <div className="container">
                   <div className="gallery-body row">
-                    {this.state.result.map((url, index) => (
-                      <div
-                        className="col-4"
-                        key={index}
-                        onClick={e => this.setState({ selectedImage: url })}
-                      >
-                        <img className="avatar" src={url} alt="Foto"></img>
-                      </div>
-                    ))}
+                    {this.state.result.length === 0 ? (
+                      <h2>Resultado não encontrado!</h2>
+                    ) : (
+                      this.state.result.map((url, index) => (
+                        <div
+                          className="col-4"
+                          key={index}
+                          onClick={e => this.setState({ selectedImage: url })}
+                        >
+                          <img className="avatar" src={url} alt="Foto"></img>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
               </div>
