@@ -5,37 +5,6 @@ import TypeChecker from "typeco";
 const ENTER_KEY = 13;
 const SEARCH_BUTTON_EDGE = 35;
 
-const searchFieldStyle = {
-  border: "1px #ddd solid",
-  display: "inline-flex",
-  justifyContent: "space-between",
-  height: SEARCH_BUTTON_EDGE,
-  width: "100%",
-};
-
-const searchFieldButtonStyle = {
-  height: SEARCH_BUTTON_EDGE - 2, // reduces 2px because of top and bottom border
-  width: SEARCH_BUTTON_EDGE - 2,
-  outline: "none",
-  backgroundColor: "white",
-  cursor: "pointer",
-  padding: 5,
-  boxSizing: "border-box",
-  appearance: "none",
-  border: "none",
-  borderLeft: "1px #ddd solid",
-};
-
-const searchFieldInputStyle = {
-  outline: "none",
-  border: "none",
-  fontSize: 14,
-  padding: 10,
-  flex: 1,
-  color: "#5a5a5a",
-  fontWeight: 100,
-  height: SEARCH_BUTTON_EDGE - 2,
-};
 
 const SearchIcon = () => {
   const iconEdge = Math.ceil(SEARCH_BUTTON_EDGE * 0.6);
@@ -113,10 +82,9 @@ class SearchField extends React.Component {
     const className = `react-search-field ${classNames}`;
 
     return (
-      <div className={className} style={searchFieldStyle}>
+      <div className={className}>
         <input
           className="react-search-field-input"
-          style={searchFieldInputStyle}
           onChange={this.onChangeBound}
           onKeyPress={this.onEnterBound}
           placeholder={placeholder}
@@ -125,8 +93,7 @@ class SearchField extends React.Component {
         />
         <button
           className="react-search-field-button"
-          type="button"
-          style={searchFieldButtonStyle}
+          type="button" 
           onClick={this.onSearchClick}
         >
           <SearchIcon />
