@@ -92,8 +92,8 @@ class ImageSelector extends Component {
 
     return (
       <div>
-        <Button color="secondary" onClick={this.toggle}>
-          Procurar imagem
+        <Button className="btn-dashed" outline color="secondary" onClick={this.toggle}>
+        <i class="fal fa-search"></i>  Procurar imagem
         </Button>
         <Modal isOpen={modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Selecione seu avatar</ModalHeader>

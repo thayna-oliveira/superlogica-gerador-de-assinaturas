@@ -3,11 +3,12 @@ import React from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Signature from "./components/Signature";
+import logo from "./assets/img/logo-simbolo.svg";
 
 function App() {
   return (
     <div>
-      <Header />
+      <Header logo={logo}/>
 
       <Signature />
 

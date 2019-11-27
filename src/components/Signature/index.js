@@ -11,6 +11,7 @@ import {
   FormGroup,
   Label,
   Input,
+  FormText,
 } from "reactstrap";
 
 class Signature extends Component {
@@ -120,69 +121,96 @@ class Signature extends Component {
       <div className="hero">
         <Container>
           <Row>
-            <Col lg="6">
-              <Form className="pr-lg-5">
-                <FormGroup>
-                  <Label for="name">Nome</Label>
-                  <Input
-                    type="text"
-                    name="name"
-                    id="name"
-                    placeholder="Nome"
-                    onChange={e => this.setState({ nome: e.target.value })}
-                  />
+            <Col lg="6" className="mb-5">
+              <div className="nav-header mt-4 mb-5">Gerador de Assinaturas</div>
+              <Form className="mb-5">
+                <FormGroup row className="mb-4">
+                  <Label for="name" sm={3}>
+                    Nome
+                  </Label>
+                  <Col sm={9}>
+                    <Input
+                      type="text"
+                      name="name"
+                      id="name"
+                      placeholder="Nome"
+                      onChange={e => this.setState({ nome: e.target.value })}
+                    />{" "}
+                  </Col>
                 </FormGroup>
 
-                <FormGroup>
-                  <Label for="exampleSelect">Empresa</Label>
-                  <Input
-                    type="select"
-                    name="select"
-                    id="exampleSelect"
-                    onChange={e => this.setState({ empresa: e.target.value })}
-                  >
-                    <option value="">Selecionar...</option>
-                    <option value="superlogica">Superlógica</option>
-                    <option value="pjbank">PJBank</option>
-                  </Input>
+                <FormGroup row className="mb-4">
+                  <Label for="exampleSelect" sm={3}>
+                    Empresa
+                  </Label>
+                  <Col sm={9}>
+                    <Input
+                      type="select"
+                      name="select"
+                      id="exampleSelect"
+                      onChange={e => this.setState({ empresa: e.target.value })}
+                    >
+                      <option value="">Selecionar...</option>
+                      <option value="superlogica">Superlógica</option>
+                      <option value="pjbank">PJBank</option>
+                    </Input>
+                  </Col>
                 </FormGroup>
 
-                <FormGroup>
-                  <Label for="cargo">Cargo/Setor</Label>
-                  <Input
-                    type="text"
-                    name="cargo"
-                    id="cargo"
-                    placeholder="Cargo/Setor"
-                    onChange={e => this.setState({ cargo: e.target.value })}
-                  />
+                <FormGroup row className="mb-4">
+                  <Label for="cargo" sm={3}>
+                    Cargo/Setor
+                  </Label>
+                  <Col sm={9}>
+                    <Input
+                      type="text"
+                      name="cargo"
+                      id="cargo"
+                      placeholder="Cargo/Setor"
+                      onChange={e => this.setState({ cargo: e.target.value })}
+                    />
+                  </Col>
                 </FormGroup>
 
-                <FormGroup>
-                  <Label for="cargo">Telefone</Label>
-                  <Input
-                    type="phone"
-                    name="cargo"
-                    id="cargo"
-                    placeholder="Telefone"
-                    onChange={e => this.setState({ telefone: e.target.value })}
-                  />
+                <FormGroup row className="mb-4">
+                  <Label for="cargo" sm={3}>
+                    Telefone
+                  </Label>
+                  <Col sm={9}>
+                    <Input
+                      type="phone"
+                      name="cargo"
+                      id="cargo"
+                      placeholder="Telefone"
+                      onChange={e =>
+                        this.setState({ telefone: e.target.value })
+                      }
+                    />
+                  </Col>
                 </FormGroup>
 
-                <FormGroup>
-                  <Label>Avatar</Label>
-                  <ImageSelector callbackFromParent={this.handleData} />
+                <FormGroup row className="mb-4">
+                  <Label sm={3}>Avatar</Label>
+                  <Col sm={9}>
+                    <ImageSelector callbackFromParent={this.handleData} />
+                    <FormText color="muted">
+                      This is some placeholder block-level help text for the
+                      above input.
+                    </FormText>
+                  </Col>
                 </FormGroup>
               </Form>
               <Button color="primary" onClick={this.getAssinatura}>
-                {this.state.copiarAssinatura}
+                <i class="fal fa-copy"></i> {"  "} {this.state.copiarAssinatura}
               </Button>{" "}
               <Button color="primary" clickHandler={this.getCodigoFonte}>
-                {this.state.copiarFonte}
+                <i class="fal fa-copy"></i> {"  "} {this.state.copiarFonte}
               </Button>
             </Col>
 
             <Col lg="6" className="ml-auto">
+              <div className="nav-header mt-4 mb-5">Pré-visualizar</div>
+
               <div className="header-email">Nova Mensagem</div>
               <div className="card-email">
                 <div className="destinatario">

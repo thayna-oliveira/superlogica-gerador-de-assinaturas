@@ -4,10 +4,11 @@ import { Navbar, NavbarBrand, Container, Row } from "reactstrap";
 
 const Header = props => {
   return (
-    <Navbar color="light" light expand="md">
+    <Navbar light expand="md">
       <Container>
         <Row>
-          <NavbarBrand href="/">Gerador de Assinaturas</NavbarBrand>
+          
+          <NavbarBrand href="/"><img src={props.logo}></img> Gerador de Assinaturas</NavbarBrand>
         </Row>
       </Container>
     </Navbar>
