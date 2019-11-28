@@ -8,7 +8,7 @@ const Header = props => {
       <Container>
         <Row>
           
-          <NavbarBrand href="/"><img src={props.logo}></img> Gerador de Assinaturas</NavbarBrand>
+          <NavbarBrand href="/"><img className="logo" src={props.logo} alt="Gerador de Assinaturas"></img> Gerador de Assinaturas</NavbarBrand>
         </Row>
       </Container>
     </Navbar>

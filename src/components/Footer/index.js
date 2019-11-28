@@ -7,7 +7,7 @@ const Footer = ({ year, text }) => (
     <Container>
       <Row>
         <div className="text-center">
-          © {year} {text}
+          {`© ${year} ${text}`}
         </div>
       </Row>
     </Container>
