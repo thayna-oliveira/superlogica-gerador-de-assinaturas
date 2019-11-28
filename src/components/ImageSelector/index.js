@@ -85,15 +85,23 @@ class ImageSelector extends Component {
     });
   }
 
-  toggle = () => this.setState({ modal: !this.state.modal });
+  toggle = () => {
+    this.setState({ modal: !this.state.modal });
+    this.onSearchImage("");
+  };
 
   render() {
     let modal = this.state.modal;
 
     return (
       <div>
-        <Button className="btn-dashed" outline color="secondary" onClick={this.toggle}>
-        <i class="fal fa-search"></i>  Procurar imagem
+        <Button
+          className="btn-dashed"
+          outline
+          color="secondary"
+          onClick={this.toggle}
+        >
+          <i class="fal fa-search"></i> Procurar imagem
         </Button>
         <Modal isOpen={modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Selecione seu avatar</ModalHeader>
@@ -118,7 +126,7 @@ class ImageSelector extends Component {
                     ) : (
                       this.state.result.map((url, index) => (
                         <div
-                          className="col-4"
+                          className="col-4 gallery-item"
                           key={index}
                           onClick={e => this.setState({ selectedImage: url })}
                         >

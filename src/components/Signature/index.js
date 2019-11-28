@@ -203,7 +203,7 @@ class Signature extends Component {
               <Button color="primary" onClick={this.getAssinatura}>
                 <i class="fal fa-copy"></i> {"  "} {this.state.copiarAssinatura}
               </Button>{" "}
-              <Button color="primary" clickHandler={this.getCodigoFonte}>
+              <Button color="primary" onClick={this.getCodigoFonte}>
                 <i class="fal fa-copy"></i> {"  "} {this.state.copiarFonte}
               </Button>
             </Col>
